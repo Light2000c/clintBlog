@@ -1,0 +1,290 @@
+<app-header (search)="search($event)">
+  <main class="head-content" id="main">
+    <section>
+      <ng-container *ngIf="(blogPost && blogPost.length) || (searchResult && searchResult.length); else skeleton">
+        <div class="container">
+          <div class="row">
+
+            <div class="col-md-9" data-aos="fade-up">
+              <!-- <h3 class="category-title">Category: All</h3> -->
+
+              @if (!searchKeyword) {
+              <h3 class="category-title">Category: {{ category? category : 'All' }}</h3>
+              <ng-container *ngFor="let post of blogPost | slice:7 | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: resetLength(blogPost.length, 7)} ">
+                <app-post-six [post]="post"></app-post-six>
+              </ng-container>
+              }@else{
+              <h3 class="category-title">Searched: {{ searchKeyword }}</h3>
+              <ng-container *ngFor="let post of searchResult | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: resetLength(searchResult.length, 7)}">
+                <app-post-six [post]="post"></app-post-six>
+              </ng-container>
+              }
+
+              <pagination-controls
+              (pageChange)="handlePageChange($event)"
+              ></pagination-controls>
+
+              <!-- <ng-container *ngFor="let post of blogPost | slice:0:6">
+              <app-post-six [post]="post"></app-post-six>
+            </ng-container> -->
+
+            </div>
+
+            <div class="col-md-3">
+              <div class="aside-block">
+
+                <ul class="nav nav-pills custom-tab-nav mb-4" id="pills-tab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-popular-tab" data-bs-toggle="pill"
+                      data-bs-target="#pills-popular" type="button" role="tab" aria-controls="pills-popular"
+                      aria-selected="true">Popular</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-trending-tab" data-bs-toggle="pill"
+                      data-bs-target="#pills-trending" type="button" role="tab" aria-controls="pills-trending"
+                      aria-selected="false">Trending</button>
+                  </li>
+                </ul>
+
+                <div class="tab-content" id="pills-tabContent">
+                  <div class="tab-pane fade show active" id="pills-popular" role="tabpanel"
+                    aria-labelledby="pills-popular-tab">
+                    <ng-container *ngFor="let post of blogPost | slice:0:7">
+                      <app-post-five [post]="post"></app-post-five>
+                    </ng-container>
+
+                  </div>
+
+                  <div class="tab-pane fade" id="pills-trending" role="tabpanel" aria-labelledby="pills-trending-tab">
+                    <ng-container *ngFor="let post of blogPost | slice:7:13">
+                      <app-post-five [post]="post"></app-post-five>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="aside-block">
+                <h3 class="aside-title">Video</h3>
+                <div class="video-post">
+                  <a href="https://www.youtube.com/watch?v=AiFfDjmd0jU" class="glightbox link-video">
+                    <span class="bi-play-fill"></span>
+                    <img src="/assets/web/assets/img/post-landscape-5.jpg" alt="" class="img-fluid">
+                  </a>
+                </div>
+              </div><!-- End Video -->
+
+              <div class="aside-block">
+                <h3 class="aside-title">Categories</h3>
+                <ul class="aside-links list-unstyled">
+                  <li><a (click)="getPostByCategory('all')"><i class="bi bi-chevron-right"></i>All </a></li>
+                  <li *ngFor="let category of categories"><a (click)="getPostByCategory(category?.title)"><i
+                        class="bi bi-chevron-right"></i> {{
+                      category?.title }}</a></li>
+                </ul>
+              </div><!-- End Categories -->
+
+            </div>
+
+          </div>
+        </div>
+      </ng-container>
+
+
+      <ng-template #skeleton>
+        <div class="container">
+          <div class="row">
+
+            <div class="col-md-9" data-aos="fade-up">
+              <h3 class="category-title">Category: All</h3>
+
+
+              <div class="d-md-flex post-entry-2 half loading-skeleton">
+                <a href="single-post.html" class="me-4 thumbnail">
+                  <img src="/assets/web/assets/img/post-landscape-2.jpg" alt="" class="img-fluid">
+                </a>
+                <div>
+                  <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul
+                      5th '22</span></div>
+                  <h3><a href="single-post.html">What is the son of Football Coach John Gruden, Deuce Gruden doing
+                      Now?</a></h3>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio placeat exercitationem magni
+                    voluptates dolore. Tenetur fugiat voluptates quas, nobis error deserunt aliquam temporibus sapiente,
+                    laudantium dolorum itaque libero eos deleniti?</p>
+                  <div class="d-flex align-items-center author">
+                    <div class="photo"><img src="/assets/web/assets/img/person-2.jpg" alt="" class="img-fluid"></div>
+                    <div class="name">
+                      <h3 class="m-0 p-0">Wade Warren</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="d-md-flex post-entry-2 half loading-skeleton">
+                <a href="single-post.html" class="me-4 thumbnail">
+                  <img src="/assets/web/assets/img/post-landscape-2.jpg" alt="" class="img-fluid">
+                </a>
+                <div>
+                  <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul
+                      5th '22</span></div>
+                  <h3><a href="single-post.html">What is the son of Football Coach John Gruden, Deuce Gruden doing
+                      Now?</a></h3>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio placeat exercitationem magni
+                    voluptates dolore. Tenetur fugiat voluptates quas, nobis error deserunt aliquam temporibus sapiente,
+                    laudantium dolorum itaque libero eos deleniti?</p>
+                  <div class="d-flex align-items-center author">
+                    <div class="photo"><img src="/assets/web/assets/img/person-2.jpg" alt="" class="img-fluid"></div>
+                    <div class="name">
+                      <h3 class="m-0 p-0">Wade Warren</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="d-md-flex post-entry-2 half loading-skeleton">
+                <a href="single-post.html" class="me-4 thumbnail">
+                  <img src="/assets/web/assets/img/post-landscape-2.jpg" alt="" class="img-fluid">
+                </a>
+                <div>
+                  <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul
+                      5th '22</span></div>
+                  <h3><a href="single-post.html">What is the son of Football Coach John Gruden, Deuce Gruden doing
+                      Now?</a></h3>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio placeat exercitationem magni
+                    voluptates dolore. Tenetur fugiat voluptates quas, nobis error deserunt aliquam temporibus sapiente,
+                    laudantium dolorum itaque libero eos deleniti?</p>
+                  <div class="d-flex align-items-center author">
+                    <div class="photo"><img src="/assets/web/assets/img/person-2.jpg" alt="" class="img-fluid"></div>
+                    <div class="name">
+                      <h3 class="m-0 p-0">Wade Warren</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="aside-block">
+
+                <ul class="nav nav-pills custom-tab-nav mb-4" id="pills-tab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-popular-tab" data-bs-toggle="pill"
+                      data-bs-target="#pills-popular" type="button" role="tab" aria-controls="pills-popular"
+                      aria-selected="true">Popular</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-trending-tab" data-bs-toggle="pill"
+                      data-bs-target="#pills-trending" type="button" role="tab" aria-controls="pills-trending"
+                      aria-selected="false">Trending</button>
+                  </li>
+                </ul>
+
+                <div class="tab-content loading-skeleton" id="pills-tabContent">
+
+
+                  <div class="tab-pane fade show active" id="pills-popular" role="tabpanel"
+                    aria-labelledby="pills-popular-tab">
+                    <div class="post-entry-1 border-bottom">
+                      <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
+                        <span>Jul 5th
+                          '22</span>
+                      </div>
+                      <h2 class="mb-2"><a href="single-post.html">10 Life-Changing Hacks Every Working Mom Should
+                          Know</a>
+                      </h2>
+                      <span class="author mb-3 d-block">Jenny Wilson</span>
+                    </div>
+
+
+                    <div class="post-entry-1 border-bottom">
+                      <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
+                        <span>Jul 5th
+                          '22</span>
+                      </div>
+                      <h2 class="mb-2"><a href="single-post.html">10 Life-Changing Hacks Every Working Mom Should
+                          Know</a>
+                      </h2>
+                      <span class="author mb-3 d-block">Jenny Wilson</span>
+                    </div>
+
+                    <div class="post-entry-1 border-bottom">
+                      <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
+                        <span>Jul 5th
+                          '22</span>
+                      </div>
+                      <h2 class="mb-2"><a href="single-post.html">10 Life-Changing Hacks Every Working Mom Should
+                          Know</a>
+                      </h2>
+                      <span class="author mb-3 d-block">Jenny Wilson</span>
+                    </div>
+
+                    <div class="post-entry-1 border-bottom">
+                      <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
+                        <span>Jul 5th
+                          '22</span>
+                      </div>
+                      <h2 class="mb-2"><a href="single-post.html">10 Life-Changing Hacks Every Working Mom Should
+                          Know</a>
+                      </h2>
+                      <span class="author mb-3 d-block">Jenny Wilson</span>
+                    </div>
+
+                  </div>
+
+                  <div class="tab-pane fade" id="pills-trending" role="tabpanel" aria-labelledby="pills-trending-tab">
+                    <div class="post-entry-1 border-bottom">
+                      <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
+                        <span>Jul 5th
+                          '22</span>
+                      </div>
+                      <h2 class="mb-2"><a href="single-post.html">10 Life-Changing Hacks Every Working Mom Should
+                          Know</a>
+                      </h2>
+                      <span class="author mb-3 d-block">Jenny Wilson</span>
+                    </div>
+
+
+                    <div class="post-entry-1 border-bottom">
+                      <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
+                        <span>Jul 5th
+                          '22</span>
+                      </div>
+                      <h2 class="mb-2"><a href="single-post.html">10 Life-Changing Hacks Every Working Mom Should
+                          Know</a>
+                      </h2>
+                      <span class="author mb-3 d-block">Jenny Wilson</span>
+                    </div>
+
+                    <div class="post-entry-1 border-bottom">
+                      <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
+                        <span>Jul 5th
+                          '22</span>
+                      </div>
+                      <h2 class="mb-2"><a href="single-post.html">10 Life-Changing Hacks Every Working Mom Should
+                          Know</a>
+                      </h2>
+                      <span class="author mb-3 d-block">Jenny Wilson</span>
+                    </div>
+
+                    <div class="post-entry-1 border-bottom">
+                      <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
+                        <span>Jul 5th
+                          '22</span>
+                      </div>
+                      <h2 class="mb-2"><a href="single-post.html">10 Life-Changing Hacks Every Working Mom Should
+                          Know</a>
+                      </h2>
+                      <span class="author mb-3 d-block">Jenny Wilson</span>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </ng-template>
+    </section>
+  </main><!-- End #main -->
+</app-header>

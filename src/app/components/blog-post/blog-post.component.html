@@ -1,0 +1,65 @@
+<ng-container *ngIf="displayType == 1">
+  <div class="d-lg-flex post-entry-2">
+    <a href="single-post.html" class="me-4 thumbnail mb-4 mb-lg-0 d-inline-block">
+      <img [src]="getImage(post?.image)" alt="" class="img-fluid">
+    </a>
+    <div>
+      <div class="post-meta"><span class="date">{{ post?.category }}</span>
+        <span class="mx-1">&bullet;</span> <span>{{ post?.created_at }}</span>
+      </div>
+      <h3><a href="single-post.html">{{ post?.title }}</a></h3>
+      <p>{{ post?.description }}</p>
+      <div class="d-flex align-items-center author">
+        <div class="photo"><img src="/assets/web/assets/img/person-2.jpg" alt="" class="img-fluid"></div>
+        <div class="name">
+          <h3 class="m-0 p-0">Wade Warren</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="displayType == 2">
+  <div class="post-entry-1 border-bottom">
+    <a href="single-post.html"><img [src]="getImage(post?.image)" alt="" class="img-fluid"></a>
+    <div class="post-meta"><span class="date">{{ post?.category }}</span>
+      <span class="mx-1">&bullet;</span> <span>{{ post?.created_at }}</span>
+    </div>
+    <h2 class="mb-2"><a href="single-post.html">{{ post?.title }}</a></h2>
+    <span class="author mb-3 d-block">Jenny Wilson</span>
+    <p class="mb-4 d-block">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero temporibus repudiandae,
+      inventore pariatur numquam cumque possimus</p>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="displayType == 3">
+  <div class="post-entry-1">
+    <div class="post-meta"><span class="date">{{ post?.category }}</span>
+      <span class="mx-1">&bullet;</span> <span>{{ post?.created_at }}</span>
+    </div>
+    <h2 class="mb-2"><a href="single-post.html">{{ post?.title }}</a></h2>
+    <span class="author mb-3 d-block">Jenny Wilson</span>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="displayType == 4">
+  <div class="post-entry-1">
+    <a href="single-post.html"><img [src]="getImage(post?.image)" alt="" class="img-fluid"></a>
+    <div class="post-meta"><span class="date">{{ post?.categeory }}</span> <span class="mx-1">&bullet;</span>
+      <span>{{ post?.created_at }}</span>
+    </div>
+    <h2 class="mb-2"><a href="single-post.html">{{ post?.title }}</a></h2>
+    <span class="author mb-3 d-block">Jenny Wilson</span>
+    <p class="mb-4 d-block">{{ post?.description }}</p>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="displayType == 5">
+  <div class="post-entry-1 border-bottom">
+    <div class="post-meta"><span class="date">{{ post?.category}}</span> <span class="mx-1">&bullet;</span>
+      <span>{{ post?.created_at }}</span>
+    </div>
+    <h2 class="mb-2"><a href="single-post.html">{{ post?.title }}</a></h2>
+    <span class="author mb-3 d-block">Jenny Wilson</span>
+  </div>
+</ng-container>

@@ -1,0 +1,130 @@
+<app-admin-header></app-admin-header>
+<!-- BEGIN: Content-->
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
+                <h3 class="content-header-title mb-0 d-inline-block">Add Post</h3>
+                <div class="row breadcrumbs-top d-inline-block">
+                    <div class="breadcrumb-wrapper col-12">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">Add Blog Post
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-header-right col-md-6 col-12">
+                <div class="btn-group float-md-right">
+                    <button class="btn btn-info dropdown-toggle mb-1" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Action</button>
+                    <div class="dropdown-menu arrow"><a class="dropdown-item" href="#"><i
+                                class="fa fa-calendar-check mr-1"></i> Calender</a><a class="dropdown-item" href="#"><i
+                                class="fa fa-cart-plus mr-1"></i> Cart</a><a class="dropdown-item" href="#"><i
+                                class="fa fa-life-ring mr-1"></i> Support</a>
+                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i
+                                class="fa fa-cog mr-1"></i> Settings</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+            <section id="all-transactions">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Add Blog Post</h4>
+                            </div>
+                            <div class="card-content mt-1">
+
+                                <div class="card-content collapse show">
+                                    <div class="card-body">
+                                        @if(message){
+                                        <div [class]="displayType == 'success'?'alert alert-success alert-dismissible fade show': 'alert alert-danger alert-dismissible fade show'"
+                                            role="alert">
+                                            {{ message }}.
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        }
+
+                                        <form [formGroup]="form" (ngSubmit)="send()" enctype="multipart/form-data">
+                                            <div class="form-body">
+
+                                                <div class="form-group">
+                                                    <label for="companyName">Title</label>
+                                                    <input formControlName="title" type="text" id="companyName"
+                                                        class="form-control" placeholder="Post Title">
+                                                    <div *ngIf="!form.controls['title'].valid  && submitAttempt">
+                                                        <small class="text-danger">Title field is required</small>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="companyName">Image</label>
+                                                    <input formControlName="image" type="file"
+                                                        (change)="onFileSelected($event)" id="companyName"
+                                                        class="form-control" placeholder="" name="file">
+                                                    <div *ngIf="!form.controls['image'].valid  && submitAttempt">
+                                                        <small class="text-danger">Image field is required</small>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="form-group">
+                                                    <label for="projectinput5">Category</label>
+                                                    <select formControlName="category" id="projectinput5"
+                                                        class="form-control">
+                                                        <option value="" selected="" disabled="">Select a category
+                                                        </option>
+                                                        <ng-container *ngIf="categories else staticCategories">
+                                                            <option class="text-capitalize" *ngFor="let category of categories"
+                                                                [value]="category?.title">{{ category?.title }}</option>
+                                                        </ng-container>
+                                                        <ng-template #staticCategories>
+                                                            <option value="entertainment">Entertainment</option>
+                                                            <option value="sports">Sports</option>
+                                                            <option value="business">Business</option>
+                                                            <option value="technology">Technology</option>
+                                                        </ng-template>
+                                                    </select>
+                                                    <div *ngIf="!form.controls['category'].valid  && submitAttempt">
+                                                        <small class="text-danger">Category field is required</small>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label for="projectinput8">Description</label>
+                                                    <textarea formControlName="description" id="projectinput8" rows="5"
+                                                        class="form-control" placeholder="About Project"></textarea>
+                                                    <div *ngIf="!form.controls['description'].valid  && submitAttempt">
+                                                        <small class="text-danger">Description field is required</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-actions">
+                                                <app-submit-button title="Save Post" [busy]="busy"></app-submit-button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- END: Content-->

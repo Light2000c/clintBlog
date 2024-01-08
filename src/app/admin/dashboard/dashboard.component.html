@@ -1,0 +1,124 @@
+<app-admin-header></app-admin-header>
+<!-- BEGIN: Content-->
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
+                <h3 class="content-header-title mb-0 d-inline-block">Dashboard</h3>
+                <div class="row breadcrumbs-top d-inline-block">
+                    <div class="breadcrumb-wrapper col-12">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">Dashboard
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="content-header-right col-md-6 col-12">
+                <div class="btn-group float-md-right">
+                    <button class="btn btn-info dropdown-toggle mb-1" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Action</button>
+                    <div class="dropdown-menu arrow"><a class="dropdown-item" href="#"><i
+                                class="fa fa-calendar-check mr-1"></i> Calender</a><a class="dropdown-item" href="#"><i
+                                class="fa fa-cart-plus mr-1"></i> Cart</a><a class="dropdown-item" href="#"><i
+                                class="fa fa-life-ring mr-1"></i> Support</a>
+                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i
+                                class="fa fa-cog mr-1"></i> Settings</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+            <section id="bank-cards" class="bank-cards">
+                <div class="row match-height">
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                       <div class="card bank-card pull-up">
+                          <div class="card-content">
+                             <div class="card-body">
+                                <div class="row">
+                                   <div class="col-5 text-left">
+                                      <h3 class="mb-0">$1.2K</h3>
+                                      <p class="text-light">per Ounce</p>
+                                      <h4 class="warning mt-1 text-bold-500">Gold</h4>
+                                   </div>
+                                   <div class="col-7">
+                                      <div class="float-right">
+                                         <canvas id="gold-chart" class="height-75"></canvas>
+                                      </div>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                       <div class="card bank-card pull-up">
+                          <div class="card-content">
+                             <div class="card-body">
+                                <div class="row">
+                                   <div class="col-5 text-left">
+                                      <h3 class="mb-0">$14.66</h3>
+                                      <p class="text-light">per Ounce</p>
+                                      <h4 class="info mt-1 text-bold-500">Silver</h4>
+                                   </div>
+                                   <div class="col-7">
+                                      <div class="float-right">
+                                         <canvas id="silver-chart" class="height-75"></canvas>
+                                      </div>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                       <div class="card bank-card pull-up">
+                          <div class="card-content">
+                             <div class="card-body">
+                                <div class="row">
+                                   <div class="col-5 text-left">
+                                      <h3 class="mb-0">$0.88</h3>
+                                      <p class="text-light">per Unit</p>
+                                      <h4 class="danger mt-1 text-bold-500">USD</h4>
+                                   </div>
+                                   <div class="col-7">
+                                      <div class="float-right">
+                                         <canvas id="euro-chart" class="height-75"></canvas>
+                                      </div>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                       <div class="card bank-card pull-up">
+                          <div class="card-content">
+                             <div class="card-body">
+                                <div class="row">
+                                   <div class="col-5 text-left">
+                                      <h3 class="mb-0">$6.5K</h3>
+                                      <p class="text-light">per unit</p>
+                                      <h4 class="success mt-1 text-bold-500">EURO</h4>
+                                   </div>
+                                   <div class="col-7">
+                                      <div class="float-right">
+                                         <canvas id="bitcoin-chart" class="height-75"></canvas>
+                                      </div>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+            </section>
+
+            <button class="btn btn-outline-primary" (click)="logout()">Logout</button>
+        </div>
+    </div>
+</div>
+<!-- END: Content-->

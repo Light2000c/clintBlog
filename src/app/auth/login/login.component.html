@@ -1,0 +1,99 @@
+<link rel="apple-touch-icon" href="/assets/web/app-assets/images/ico/apple-icon-120.png">
+<link rel="shortcut icon" type="image/x-icon" href="/assets/web/app-assets/images/ico/favicon.ico">
+<link
+  href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700"
+  rel="stylesheet">
+
+<!-- BEGIN: Vendor CSS-->
+<link rel="stylesheet" type="text/css" href="/assets/web/app-assets/vendors/css/vendors.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/web/app-assets/vendors/css/forms/icheck/icheck.css">
+<link rel="stylesheet" type="text/css" href="/assets/web/app-assets/vendors/css/forms/icheck/custom.css">
+<!-- END: Vendor CSS-->
+
+<!-- BEGIN: Theme CSS-->
+<link rel="stylesheet" type="text/css" href="/assets/web/app-assets/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/web/app-assets/css/bootstrap-extended.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/web/app-assets/css/colors.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/web/app-assets/css/components.min.css">
+<!-- END: Theme CSS-->
+
+<!-- BEGIN: Page CSS-->
+<link rel="stylesheet" type="text/css" href="/assets/web/app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
+<link rel="stylesheet" type="text/css" href="/assets/web/app-assets/css/core/colors/palette-gradient.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/web/app-assets/css/pages/login-register.min.css">
+<!-- END: Page CSS-->
+
+<!-- BEGIN: Custom CSS-->
+<link rel="stylesheet" type="text/css" href="/assets/web/app-assets/assets/css/style.css">
+<!-- END: Custom CSS-->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<!-- BEGIN: Content-->
+<div class="app-content content">
+  <div class="content-overlay"></div>
+  <div class="content-wrapper">
+    <div class="content-header row">
+    </div>
+    <div class="content-body">
+      <section class="row flexbox-container">
+        <div class="col-12 d-flex align-items-center justify-content-center">
+          <div class="col-lg-4 col-md-8 col-10 box-shadow-2 p-0">
+            <div class="card border-grey border-lighten-3 px-1 py-1 m-0">
+              <div class="card-header border-0">
+                <div class="card-title text-center">
+                  <img src="/assets/web/app-assets/images/logo/logo-dark.png" alt="branding logo">
+                </div>
+                <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2"><span>Welcome Back
+                    Admin</span></h6>
+              </div>
+              <div class="card-content">
+                <div class="card-body">
+
+
+                  <div *ngIf="errorText" class="alert alert-danger" role="alert">
+                    {{ errorText }}
+                  </div>
+
+                  <form [formGroup]="form" class="form-horizontal" (ngSubmit)="send()">
+                    <fieldset class="form-group position-relative has-icon-left">
+                      <input type="email" formControlName="email" class="form-control" id="user-name"
+                        placeholder="example@gmail.com">
+                      <div class="form-control-position">
+                        <i class="fa fa-user"></i>
+                      </div>
+                      @if(!form.controls['email'].valid && submitAttempt){
+                      <small class="text-danger">Email field is required</small>
+                      }
+                    </fieldset>
+                    <fieldset class="form-group position-relative has-icon-left">
+                      <input type="password" formControlName="password" class="form-control" id="user-password"
+                        placeholder="Enter Password">
+                      <div class="form-control-position">
+                        <i class="fa fa-key"></i>
+                      </div>
+                      @if(!form.controls['password'].valid && submitAttempt){
+                      <small class="text-danger">Password field is required</small>
+                      }
+                    </fieldset>
+                    <div class="form-group row">
+                      <div class="col-sm-6 col-12 text-center text-sm-left pr-0">
+                      </div>
+                      <div class="col-sm-6 col-12 float-sm-left text-center text-sm-right"><a
+                          href="recover-password.html" class="card-link">Forgot Password?</a></div>
+                    </div>
+                    <button type="submit" class="btn btn-outline-info btn-block" [disabled]="busy"> Login
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+<!-- END: Content-->

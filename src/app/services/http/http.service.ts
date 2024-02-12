@@ -15,10 +15,10 @@ export class HttpService {
   public getRequest(url: string, options: any) {
     const promise = new Promise((resolve, reject) => {
       this.http.get(url, options).subscribe((response: any) => {
-        console.log(response);
+        // console.log(response);
         resolve(response);
       }, (err) => {
-        console.log(err);
+        // console.log(err);
         reject(err);
       });
     });
@@ -29,13 +29,13 @@ export class HttpService {
   public postRequest(url: string, body: any, options: any) {
 
     const promise = new Promise((resolve, reject) => {
-      console.log("data sent ==> ", body);
-      console.log("sending data to ==> ", url);
+      // console.log("data sent ==> ", body);
+      // console.log("sending data to ==> ", url);
       this.http.post(url, body, options).subscribe((response: any) => {
-        console.log(response);
+        // console.log(response);
         resolve(response);
       }, (err) => {
-        console.log(err);
+        // console.log(err);
         reject(err);
       });
     });
@@ -44,14 +44,14 @@ export class HttpService {
   }
 
   public putRequest(url: string, body: any, options: any) {
-    console.log("data sent ==> ", body);
-    console.log("sending data to ==> ", url);
+    // console.log("data sent ==> ", body);
+    // console.log("sending data to ==> ", url);
     const promise = new Promise((resolve, reject) => {
       this.http.put(url, body, options).subscribe((response: any) => {
-        console.log(response);
+        // console.log(response);
         resolve(response);
       }, (err) => {
-        console.log(err);
+        // console.log(err);
         reject(err);
       });
     });
@@ -60,14 +60,14 @@ export class HttpService {
   }
 
   public deleteRequest(url: string, options: any) {
-    console.log("options sent ==> ", options);
-    console.log("sending data to ==> ", url);
+    // console.log("options sent ==> ", options);
+    // console.log("sending data to ==> ", url);
     const promise = new Promise((resolve, reject) => {
       this.http.delete(url, options).subscribe((response: any) => {
-        console.log(response);
+        // console.log(response);
         resolve(response);
       }, (err) => {
-        console.log(err);
+        // console.log(err);
         reject(err);
       });
     });

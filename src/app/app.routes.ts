@@ -9,11 +9,11 @@ import { TeamMemberComponent } from './admin/team-member/team-member.component';
 import { NewsComponent } from './pages/news/news.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
-import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './providers/auth/auth.guard';
 import { EditPostComponent } from './admin/edit-post/edit-post.component';
 import { BlogDetailsComponent } from './pages/blog-details/blog-details.component';
+import { ChangePasswordComponent } from './admin/change-password/change-password.component';
 
 export const routes: Routes = [
 {
@@ -23,6 +23,10 @@ export const routes: Routes = [
 },
 {
     path: 'news',
+    component: NewsComponent,
+},
+{
+    path: 'news/:category',
     component: NewsComponent,
 },
 {
@@ -38,13 +42,9 @@ export const routes: Routes = [
     component: LoginComponent,
 },
 {
-    path: 'news/:id',
+    path: 'news/details/:id',
     component: BlogDetailsComponent,
 },
-// {
-//     path: 'register',
-//     component: RegisterComponent,
-// },
 {
     path: 'admin/dashboard',
     component: DashboardComponent,
@@ -79,5 +79,10 @@ export const routes: Routes = [
     component: TeamMemberComponent,
     canActivate: [AuthGuard],
 },
+{
+    path: 'admin/change-password',
+    component: ChangePasswordComponent,
+    canActivate: [AuthGuard],
+}
 
 ];

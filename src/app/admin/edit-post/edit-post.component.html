@@ -9,23 +9,19 @@
                 <div class="row breadcrumbs-top d-inline-block">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a>
+                            <li class="breadcrumb-item"><a href="admin/dashboard">Dashboard</a>
+                            <li class="breadcrumb-item"><a href="admin/blog">Blog Post</a>
                             </li>
-                            <li class="breadcrumb-item active">Blog Post
+                            <li class="breadcrumb-item active">
                             </li>
-                            <li class="breadcrumb-item active">Edit Blog Post
+                            <li class="breadcrumb-item active">{{ blogPost?.title }}
                             </li>
                         </ol>
                     </div>
                 </div>
             </div>
 
-            <div class="content-header-right col-md-6 col-12">
-                <div class="btn-group float-md-right">
-                    <button class="btn btn-info dropdown-toggle mb-1" type="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Dashboard</button>
-                </div>
-            </div>
+        
         </div>
         <div class="content-body">
             <section id="all-transactions">
@@ -54,8 +50,8 @@
                                                 <div class="row">
                                                     <div class="col-sm-12 col-lg-6">
                                                         <img class="img-fluid"
-                                                            src="https://img.freepik.com/free-photo/natures-beauty-captured-colorful-flower-close-up-generative-ai_188544-8593.jpg"
-                                                            alt="" srcset="">
+                                                            [src]="'https://clintblog.com.ng/api/uploads/'+blogPost?.image"
+                                                            alt="No Image" srcset="">
 
                                                         <div class="form-group mt-2">
                                                             <label for="companyName">Image</label>
@@ -89,8 +85,18 @@
                                                                 <option value="" selected="" disabled="">Select a
                                                                     category
                                                                 </option>
-                                                                <option value="entertainment">Entertainment</option>
-                                                                <option value="Others">Others</option>
+
+                                                                <ng-container *ngFor="let category of categories">
+                                                                    @if(category?.title == blogPost?.title){
+                                                                    <option [value]="category?.title" selected>
+                                                                        {{ category?.title }}</option>
+                                                                    }@else{
+                                                                    <option [value]="category?.title">
+                                                                        {{ category?.title }}</option>
+                                                                    }
+                                                                </ng-container>
+
+
                                                             </select>
                                                             <div
                                                                 *ngIf="!form.controls['category'].valid  && submitAttempt">

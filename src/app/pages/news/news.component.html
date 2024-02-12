@@ -10,9 +10,17 @@
 
               @if (!searchKeyword) {
               <h3 class="category-title">Category: {{ category? category : 'All' }}</h3>
+              <div *ngIf="!category">
               <ng-container *ngFor="let post of blogPost | slice:7 | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: resetLength(blogPost.length, 7)} ">
                 <app-post-six [post]="post"></app-post-six>
               </ng-container>
+            </div>
+
+            <div *ngIf="category">
+              <ng-container *ngFor="let post of blogPost | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: resetLength(blogPost.length, 7)}">
+                <app-post-six [post]="post"></app-post-six>
+              </ng-container>
+            </div>
               }@else{
               <h3 class="category-title">Searched: {{ searchKeyword }}</h3>
               <ng-container *ngFor="let post of searchResult | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: resetLength(searchResult.length, 7)}">
@@ -20,13 +28,18 @@
               </ng-container>
               }
 
-              <pagination-controls
-              (pageChange)="handlePageChange($event)"
-              ></pagination-controls>
+              <ng-container  *ngIf="(blogPost.length <= 0 && !searchKeyword) || (searchResult.length <= 0 && searchKeyword)">
+                <div class="alert alert-info" role="alert">
+                  {{ !searchKeyword? 'No post to show yet' : 'your search '+ "'"+ searchKeyword + "'" + ' didn\'t return any result.' }} <a *ngIf="searchKeyword" href="/news" class="alert-link">View all news</a>
+                </div>
+              </ng-container>
 
-              <!-- <ng-container *ngFor="let post of blogPost | slice:0:6">
-              <app-post-six [post]="post"></app-post-six>
-            </ng-container> -->
+              <ng-container *ngIf="(blogPost.length > 0 && !searchKeyword)  || searchResult.length > 0">
+                <pagination-controls
+                (pageChange)="handlePageChange($event)"
+                ></pagination-controls>
+              </ng-container>
+
 
             </div>
 
@@ -37,12 +50,7 @@
                   <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="pills-popular-tab" data-bs-toggle="pill"
                       data-bs-target="#pills-popular" type="button" role="tab" aria-controls="pills-popular"
-                      aria-selected="true">Popular</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-trending-tab" data-bs-toggle="pill"
-                      data-bs-target="#pills-trending" type="button" role="tab" aria-controls="pills-trending"
-                      aria-selected="false">Trending</button>
+                      aria-selected="true">Recent</button>
                   </li>
                 </ul>
 
@@ -52,33 +60,16 @@
                     <ng-container *ngFor="let post of blogPost | slice:0:7">
                       <app-post-five [post]="post"></app-post-five>
                     </ng-container>
-
                   </div>
 
-                  <div class="tab-pane fade" id="pills-trending" role="tabpanel" aria-labelledby="pills-trending-tab">
-                    <ng-container *ngFor="let post of blogPost | slice:7:13">
-                      <app-post-five [post]="post"></app-post-five>
-                    </ng-container>
-                  </div>
                 </div>
               </div>
-
-
-              <div class="aside-block">
-                <h3 class="aside-title">Video</h3>
-                <div class="video-post">
-                  <a href="https://www.youtube.com/watch?v=AiFfDjmd0jU" class="glightbox link-video">
-                    <span class="bi-play-fill"></span>
-                    <img src="/assets/web/assets/img/post-landscape-5.jpg" alt="" class="img-fluid">
-                  </a>
-                </div>
-              </div><!-- End Video -->
 
               <div class="aside-block">
                 <h3 class="aside-title">Categories</h3>
                 <ul class="aside-links list-unstyled">
                   <li><a (click)="getPostByCategory('all')"><i class="bi bi-chevron-right"></i>All </a></li>
-                  <li *ngFor="let category of categories"><a (click)="getPostByCategory(category?.title)"><i
+                  <li *ngFor="let category of categories"><a (click)="navigateWithCategory(category?.title)"><i
                         class="bi bi-chevron-right"></i> {{
                       category?.title }}</a></li>
                 </ul>
@@ -168,12 +159,7 @@
                   <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="pills-popular-tab" data-bs-toggle="pill"
                       data-bs-target="#pills-popular" type="button" role="tab" aria-controls="pills-popular"
-                      aria-selected="true">Popular</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-trending-tab" data-bs-toggle="pill"
-                      data-bs-target="#pills-trending" type="button" role="tab" aria-controls="pills-trending"
-                      aria-selected="false">Trending</button>
+                      aria-selected="true">Recent</button>
                   </li>
                 </ul>
 
@@ -228,54 +214,6 @@
                     </div>
 
                   </div>
-
-                  <div class="tab-pane fade" id="pills-trending" role="tabpanel" aria-labelledby="pills-trending-tab">
-                    <div class="post-entry-1 border-bottom">
-                      <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
-                        <span>Jul 5th
-                          '22</span>
-                      </div>
-                      <h2 class="mb-2"><a href="single-post.html">10 Life-Changing Hacks Every Working Mom Should
-                          Know</a>
-                      </h2>
-                      <span class="author mb-3 d-block">Jenny Wilson</span>
-                    </div>
-
-
-                    <div class="post-entry-1 border-bottom">
-                      <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
-                        <span>Jul 5th
-                          '22</span>
-                      </div>
-                      <h2 class="mb-2"><a href="single-post.html">10 Life-Changing Hacks Every Working Mom Should
-                          Know</a>
-                      </h2>
-                      <span class="author mb-3 d-block">Jenny Wilson</span>
-                    </div>
-
-                    <div class="post-entry-1 border-bottom">
-                      <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
-                        <span>Jul 5th
-                          '22</span>
-                      </div>
-                      <h2 class="mb-2"><a href="single-post.html">10 Life-Changing Hacks Every Working Mom Should
-                          Know</a>
-                      </h2>
-                      <span class="author mb-3 d-block">Jenny Wilson</span>
-                    </div>
-
-                    <div class="post-entry-1 border-bottom">
-                      <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
-                        <span>Jul 5th
-                          '22</span>
-                      </div>
-                      <h2 class="mb-2"><a href="single-post.html">10 Life-Changing Hacks Every Working Mom Should
-                          Know</a>
-                      </h2>
-                      <span class="author mb-3 d-block">Jenny Wilson</span>
-                    </div>
-                  </div>
-
 
                 </div>
               </div>

@@ -17,16 +17,21 @@ export class BlogsComponent {
   routerSubscription: any;
   endpoint = ENDPOINTS;
   public blogPosts: Blog[] = [];
+  public pageSize: number = 10;
+  public count!: number;
+  public page: number = 1;
+
 
   constructor(
     public scriptService: ScriptService,
     public data: DataService
   ) {
-    this.scriptService.init("admin");
+    
   }
 
   async ngOnInit() {
-
+    this.scriptService.init("admin");
+    
     this.load(false);
   }
 
@@ -34,16 +39,16 @@ export class BlogsComponent {
   public async load(force: boolean) {
 
     if (force) {
-      console.log("Loading blog posts");
+      // console.log("Loading blog posts");
       await this.data.fetchBlogPosts(this.endpoint.posts);
-      console.log("posts ==> ", this.data.getBlogPosts());
+      // console.log("posts ==> ", this.data.getBlogPosts());
       this.blogPosts = this.data.getBlogPosts();
     } else {
       if (!this.data.blogPostsLoaded) {
 
-        console.log("Loading blog posts");
+        // console.log("Loading blog posts");
         await this.data.fetchBlogPosts(this.endpoint.posts);
-        console.log("posts ==> ", this.data.getBlogPosts());
+        // console.log("posts ==> ", this.data.getBlogPosts());
         this.blogPosts = this.data.getBlogPosts();
       } else {
         this.blogPosts = this.data.getBlogPosts();
@@ -56,10 +61,14 @@ export class BlogsComponent {
 
     const response = await this.data.deletePost(this.endpoint.posts, id);
 
-    console.log("response is ==> ", response);
+    // console.log("response is ==> ", response);
 
     if ((response as any).status == "success") {
       await this.load(true);
     }
+  }
+
+  public handlePageChange(event: any) {
+    this.page = event;
   }
 }

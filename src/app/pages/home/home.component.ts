@@ -38,7 +38,7 @@ export class HomeComponent {
       if (!this.dataProvider.blogPostLoaded) {
         await this.dataProvider.fetchBlogPost(this.endpoints.posts);
         this.blogPost = this.dataProvider.getPost();
-        console.log("Blog post ==> ", this.blogPost);
+        // console.log("Blog post ==> ", this.blogPost);
       } else {
         this.blogPost = this.dataProvider.getPost();
       }
@@ -48,7 +48,7 @@ export class HomeComponent {
 
 
   public getImage(image: string) {
-    return "http://localhost:3000/uploads/" + image;
+    return "http://clintblog.com.ng/api/uploads/" + image;
   }
 
 

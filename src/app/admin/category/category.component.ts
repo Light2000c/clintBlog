@@ -23,6 +23,9 @@ export class CategoryComponent {
   public endpoint = ENDPOINTS;
   public message: string = "";
   public displayType!: String;
+  public pageSize: number = 10;
+  public count!: number;
+  public page: number = 1;
 
   constructor(
     public scriptService: ScriptService,
@@ -46,12 +49,12 @@ export class CategoryComponent {
     if (force) {
       await this.data.fetchCategories(this.endpoint.category);
       this.categories = this.data.getCategories();
-      console.log("categories ==>", this.categories);
+      // console.log("categories ==>", this.categories);
     } else {
       if (!this.data.categoriesLoaded) {
         await this.data.fetchCategories(this.endpoint.category);
         this.categories = this.data.getCategories();
-        console.log("categories ==>", this.categories);
+        // console.log("categories ==>", this.categories);
       }else{
         this.categories = this.data.getCategories();
       }
@@ -66,7 +69,7 @@ export class CategoryComponent {
 
       const response = await this.data.addCategory(this.endpoint.category, this.form.value);
 
-      console.log("response is ==>", response)
+      // console.log("response is ==>", response)
 
       if ((response as any).status == "success") {
         this.message = "Category has been successfully added.";
@@ -86,10 +89,14 @@ export class CategoryComponent {
 
     const response = await this.data.deleteCatgeory(this.endpoint.category, id);
 
-    console.log(response);
+    // console.log(response);
 
     if ((response as any).status == "success") {
       this.load(true);
     }
+  }
+
+  public handlePageChange(event: any) {
+    this.page = event;
   }
 }

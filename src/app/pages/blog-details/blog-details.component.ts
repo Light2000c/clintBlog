@@ -27,22 +27,23 @@ export class BlogDetailsComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.scriptService.init();
+    await this.scriptService.init();
 
     this.activatedRoute.paramMap.subscribe((param) => {
 
       this.postId = param.get('id');
-      console.log("Post Id ==> ", this.postId);
+      // console.log("Post Id ==> ", this.postId);
+
+      this.load();
+      this.loadOthers();
     });
 
-    await this.load();
-    await this.loadOthers();
   }
 
   async load() {
     const response = await this.data.fetchPostById(this.endpoints.posts, this.postId);
-    this.blogPost = response;
-    console.log("Blog post ==> ", this.blogPost);
+    this.blogPost = response[0];
+    // console.log("Blog post ==> ", this.blogPost);
   }
 
   public async loadOthers(force = false) {
@@ -53,13 +54,35 @@ export class BlogDetailsComponent implements OnInit {
       if (!this.data.blogPostLoaded) {
         await this.data.fetchBlogPost(this.endpoints.posts);
         this.otherPost = this.data.getPost();
-        console.log("Blog post ==> ", this.blogPost);
+        // console.log("Blog post ==> ", this.blogPost);
       } else {
         this.otherPost = this.data.getPost();
-        console.log("Blog post ==> ", this.otherPost);
+        // console.log("Blog post ==> ", this.otherPost);
       }
     }
 
+  }
+
+  
+  public convertDate(date: string) {
+
+    const inputDate = new Date(date);
+  
+    const options: Intl.DateTimeFormatOptions = {
+      // weekday: 'short',
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    };
+  
+    const dateFormatter = new Intl.DateTimeFormat('en-US', options);
+    const formattedDate = dateFormatter.format(inputDate).toLowerCase();
+  
+    return formattedDate;
+  
   }
 
 }

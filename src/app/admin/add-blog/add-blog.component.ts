@@ -49,12 +49,12 @@ export class AddBlogComponent {
     if (force) {
       await this.data.fetchCategories(this.endpoints.category);
       this.categories = this.data.getCategories();
-      console.log("categories ==>", this.categories);
+      // console.log("categories ==>", this.categories);
     } else {
       if (!this.data.categoriesLoaded) {
         await this.data.fetchCategories(this.endpoints.category);
         this.categories = this.data.getCategories();
-        console.log("categories ==>", this.categories);
+        // console.log("categories ==>", this.categories);
       } else {
         this.categories = this.data.getCategories();
       }
@@ -65,7 +65,7 @@ export class AddBlogComponent {
   public onFileSelected(event: any) {
     const file = event.target.files[0];
     this.file = file;
-    console.log("file is ==> ", this.file);
+    // console.log("file is ==> ", this.file);
   }
 
 
@@ -83,7 +83,7 @@ export class AddBlogComponent {
       formData.append("description", this.form.controls['description'].value);
 
 
-      console.log("form data is ==>", formData.get('image'));
+      // console.log("form data is ==>", formData.get('image'));
       this.busy = true;
 
       const response: any = await this.data.addPost(this.endpoints.posts, formData);

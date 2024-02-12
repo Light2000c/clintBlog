@@ -8,12 +8,13 @@ import { HttpHeaders } from "@angular/common/http";
 })
 
 export class DataProvider {
-    public baseUrl: string = "http://localhost:3000/api/";
+    public baseUrl: string = "http://clintblog.com.ng/api/";
     public blogPost: any[] = [];
     public searchResult: any[] = [];
     public categories: any[] = [];
     public blogPostLoaded: boolean = false;
     public categoriesLoaded: boolean = false;
+    public selectedCategory!: string;
 
     constructor(
         public httpService: HttpService
@@ -43,10 +44,22 @@ export class DataProvider {
         return this.categories;
     }
 
+    public displayImage(image: string){
+        return `http://clintblog.com.ng/api/upload/${image}`;
+    }
+
+   public setActiveCategory(value: string){
+        this.selectedCategory = value;
+    }
+
+   public getActiveCategory(){
+        return this.selectedCategory;
+    }
+
     public async fetchBlogPost(endpoint: string) {
         const response = await this.httpService.getRequest(this.baseUrl + endpoint, { headers: this.setHeader() });
 
-        console.log("Response ==> ", response);
+        // console.log("Response ==> ", response);
 
         if ((response as any).status == "success") {
             this.blogPost = (response as any).data;
@@ -57,7 +70,7 @@ export class DataProvider {
     public async fetchPostById(endpoint: string, id: string) {
         const response = await this.httpService.getRequest(this.baseUrl + endpoint + `/${id}`, { headers: this.setHeader() });
 
-        console.log("Response ==> ", response);
+        // console.log("Response ==> ", response);
 
         if ((response as any).status == "success") {
             return (response as any).data;
@@ -68,7 +81,7 @@ export class DataProvider {
     public async fetchPostByCatgeory(endpoint: string, category: string) {
         const response = await this.httpService.getRequest(this.baseUrl + endpoint + `/category/${category}`, { headers: this.setHeader() });
 
-        console.log("Response ==> ", response);
+        // console.log("Response ==> ", response);
 
         if ((response as any).status == "success") {
             this.blogPost = (response as any).data;
@@ -80,7 +93,7 @@ export class DataProvider {
         const param = { keyword: keyword }
         const response = await this.httpService.getRequest(this.baseUrl + endpoint + `/search/${keyword}`, { headers: this.setHeader() });
 
-        console.log("Response ==> ", response);
+        // console.log("Response ==> ", response);
 
         if ((response as any).status == "success") {
             this.searchResult = (response as any).data;
@@ -90,7 +103,7 @@ export class DataProvider {
 
     public async fetchCategories(endpoint: string) {
         const response = await this.httpService.getRequest(this.baseUrl + endpoint, { headers: this.setHeader() });
-        console.log("Response ==> ", response);
+        // console.log("Response ==> ", response);
 
         if ((response as any).status == "success") {
             this.categories = (response as any).data;

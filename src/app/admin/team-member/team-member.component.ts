@@ -22,6 +22,9 @@ export class TeamMemberComponent {
   public message!: string;
   public displayType!: string;
   public endpoints = ENDPOINTS;
+  public pageSize: number = 10;
+  public count!: number;
+  public page: number = 1;
 
   constructor(
     public scriptService: ScriptService,
@@ -53,7 +56,7 @@ export class TeamMemberComponent {
       if (!this.data.teamMembersLoaded) {
         await this.data.fetchTeamMembers(this.endpoints.user);
         this.teamMembers = this.data.getTeamMembers();
-        console.log("Team members ==> ", this.teamMembers);
+        // console.log("Team members ==> ", this.teamMembers);
       } else {
         this.teamMembers = this.data.getTeamMembers();
       }
@@ -72,7 +75,7 @@ export class TeamMemberComponent {
       if (this.form.controls['password'].value == this.form.controls['confirmpassword'].value) {
 
         const response = await this.data.addTeamMember(this.endpoints.user, this.form.value);
-        console.log("Response is ==> ", response);
+        // console.log("Response is ==> ", response);
 
         if (response?.status == "success") {
           this.message = "User has been successfully addded";
@@ -93,10 +96,14 @@ export class TeamMemberComponent {
   public async deleteMember(id: any) {
 
     const response = await this.data.deleteTeamMember(this.endpoints.user, id);
-    console.log("response is ==> ", response);
+    // console.log("response is ==> ", response);
     if ((response as any).status && (response as any).status == "success") {
       this.load(true);
     }
 
+  }
+
+  public handlePageChange(event: any) {
+    this.page = event;
   }
 }

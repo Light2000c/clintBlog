@@ -25,6 +25,7 @@ export class EditPostComponent {
   public blogPost!: Blog;
   public endpoints = ENDPOINTS;
   public file!: any;
+  public categories: any[] = [];
 
   constructor(
     public scriptService: ScriptService,
@@ -36,7 +37,7 @@ export class EditPostComponent {
     this.scriptService.init("admin");
 
     this.form = this.formBuilder.group({
-      title: [this.blogPost?.id ?? "", Validators.required],
+      title: [this.blogPost?.title ?? "", Validators.required],
       category: [this.blogPost?.category ?? "", Validators.required],
       image: [""],
       description: [this.blogPost?.description ?? "", Validators.required]
@@ -47,12 +48,13 @@ export class EditPostComponent {
   async ngOnInit() {
     this.activatedRoute.paramMap.subscribe((param) => {
       this.postId = param.get('id');
-      console.log("PostId is ==> ", this.postId);
+      // console.log("PostId is ==> ", this.postId);
     })
 
     await this.load();
+    await this.loadCategories();
 
-    console.log("blog post id after loading", this.blogPost.id);
+    // console.log("blog post id after loading", this.blogPost.id);
 
     if (this.blogPost) {
       this.form.controls['title'].setValue(this.blogPost.id);
@@ -70,13 +72,29 @@ export class EditPostComponent {
     await this.data.fetchPost(this.endpoints.posts, this.postId);
 
     this.blogPost = this.data.blogPost;
-    console.log("Blog Post ==> ", this.blogPost);
+    // console.log("Blog Post ==> ", this.blogPost);
+  }
+
+  public async loadCategories(force = false) {
+    if (force) {
+      await this.data.fetchCategories(this.endpoints.category);
+      this.categories = this.data.getCategories();
+      // console.log("categories ==>", this.categories);
+    } else {
+      if (!this.data.categoriesLoaded) {
+        await this.data.fetchCategories(this.endpoints.category);
+        this.categories = this.data.getCategories();
+        // console.log("categories ==>", this.categories);
+      } else {
+        this.categories = this.data.getCategories();
+      }
+    }
   }
 
   public onFileSelected(event: any) {
     let image = event.target.files[0];
     this.file = image;
-    console.log("file is ==>", this.file);
+    // console.log("file is ==>", this.file);
   }
 
   public async send() {

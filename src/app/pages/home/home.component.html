@@ -13,11 +13,10 @@
 
                 <ng-container *ngIf="blogPost && blogPost.length; else skeletonCarousel">
                   <div class="swiper-slide" *ngFor="let post of blogPost | slice:0:3">
-                    <a href="single-post.html" class="img-bg d-flex align-items-end"
+                    <a  class="img-bg d-flex align-items-end"
                       [style]="'background-image: url('+ getImage(post?.image) +')'">
                       <div class="img-bg-inner">
-                        <h2>{{ post?.title }}</h2>
-                        <div [innerHTML]="post?.description | slice:0:235"></div>
+                        <h2 [routerLink]="['/news/details/', post?.id]">{{ post?.title }}</h2>
                       </div>
                     </a>
                   </div>
@@ -25,7 +24,7 @@
 
                 <ng-template #skeletonCarousel>
                   <div class="swiper-slide loading-skeleton">
-                    <a href="single-post.html" class="img-bg d-flex align-items-end">
+                    <a  class="img-bg d-flex align-items-end">
                       <div class="img-bg-inner">
                       </div>
                     </a>
@@ -55,7 +54,7 @@
 
           <div class="section-header d-flex justify-content-between align-items-center mb-5">
             <h2>LATEST</h2>
-            <div><a href="category.html" class="more">See All News</a></div>
+            <div><a [routerLink]="['/news/']" class="more">See All News</a></div>
           </div>
 
           <div class="row">

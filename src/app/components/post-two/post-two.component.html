@@ -1,18 +1,6 @@
 <div class="post-entry-1 border-bottom">
-  <a href="single-post.html"><img [src]="getImage(post?.image)" alt="" class="img-fluid"></a>
-  <div class="post-meta"><span class="date">{{ post?.category }}</span> 
-    <span class="mx-1">&bullet;</span> <span>{{ post?.created_at }}</span></div>
-  <h2 class="mb-2"><a href="single-post.html">{{ post?.title | slice:0:46 }}..</a></h2>
-  <span class="author mb-3 d-block">Jenny Wilson</span>
-  <!-- <p class="mb-4 d-block">{{ post?.description }}</p> -->
-  <div [innerHTML]="post?.description | slice:0:148"></div>
+  <a [routerLink]="['/news/details/', post?.id]"><img  [src]="getImage(post?.image)" alt="" class="img-fluid"></a>
+  <div class="post-meta"><span class="date mt-1" style="color: blue;">{{ post?.category }}</span> 
+    <span class="mx-1">&bullet;</span> <span>{{ convertDate(post?.created_at) }}</span></div>
+  <h2 class="mb-2" ><a [routerLink]="['/news/details/', post?.id]" >{{ post?.title }}</a></h2>
 </div>
-
-
-<!-- <div class="post-entry-1 border-bottom">
-  <a href="single-post.html"><img src="/assets/web/assets/img/post-landscape-1.jpg" alt="" class="img-fluid"></a>
-  <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-  <h2 class="mb-2"><a href="single-post.html">11 Work From Home Part-Time Jobs You Can Do Now</a></h2>
-  <span class="author mb-3 d-block">Jenny Wilson</span>
-  <p class="mb-4 d-block">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero temporibus repudiandae, inventore pariatur numquam cumque possimus</p>
-</div> -->

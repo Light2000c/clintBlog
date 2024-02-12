@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Input, NgZone, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { DataProvider } from '../../providers/data/data';
+import { ENDPOINTS } from '../../providers/data/endpoints';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -13,15 +15,34 @@ export class HeaderComponent {
   @Input() searchValue!: string;
   @Output() search: EventEmitter<any> = new EventEmitter<any>();
   public isSearchActive: boolean = false;
+  public categories: any[] = [];
+  public endpoints = ENDPOINTS;
 
   constructor(
-    public router: Router
+    public router: Router,
+    public data: DataProvider,
   ) {
 
   }
 
   ngOnInit() {
-  
+    this.loadCategories();
+  }
+
+  public async loadCategories(force = false) {
+    if (force) {
+      await this.data.fetchCategories(this.endpoints.category);
+      // this.categories = this.data.getCategories();
+    } else {
+      if (!this.data.categoriesLoaded) {
+        await this.data.fetchCategories(this.endpoints.category);
+        this.categories = this.data.getCategories();
+        // console.log("categories ==> ", this.categories);
+      } else {
+        this.categories = this.data.getCategories();
+        // console.log("categories ==> ", this.categories);
+      }
+    }
   }
 
 
@@ -33,7 +54,7 @@ export class HeaderComponent {
   public onInputChange(event: any) {
     const keyword = event.target.value;
     this.searchValue = keyword;
-    console.log("keyword ==> ", this.searchValue);
+    // console.log("keyword ==> ", this.searchValue);
     this.search.emit(keyword);
   }
 
@@ -43,6 +64,11 @@ export class HeaderComponent {
 
   public hideSearchBox(){
     this.isSearchActive = false;
+  }
+
+  public navigateWithCategory(category: string){
+    const url = `/news/${category}`;
+   return this.router.navigateByUrl(url);
   }
 
 }

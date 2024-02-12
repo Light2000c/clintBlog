@@ -18,7 +18,7 @@ export interface SignIn {
 
 export class AuthProvider {
 
-    public baseUrl: string = "http://localhost:3000/api/";
+    public baseUrl: string = "http://clintblog.com.ng/api/";
     public user!: USER;
 
     constructor(
@@ -38,15 +38,15 @@ export class AuthProvider {
 
 
     public async signIn(url: string, param: SignIn) {
-        console.log("data sent to request ==>", param);
-        console.log("sending data to ==> ", this.baseUrl + url);
+        // console.log("data sent to request ==>", param);
+        // console.log("sending data to ==> ", this.baseUrl + url);
 
         try {
             const response: any = await this.http.postRequest(this.baseUrl + url, param, { headers: this.getHeader });
 
             if (response.status) {
                 if (response.status == "success") {
-                    console.log("response ==> ", response);
+                    // console.log("response ==> ", response);
                     this.user = response.data;
                     this.saveUser(this.user);
                 }
@@ -55,7 +55,7 @@ export class AuthProvider {
                 return { status: 'failed' };
             }
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             return { status: 'failed' };
         }
 
@@ -69,7 +69,7 @@ export class AuthProvider {
 
     public setUser() {
         this.user = JSON.parse(this.storage.get("userInfo") || '{}');
-        console.log("active user ==> ", this.user);
+        // console.log("active user ==> ", this.user);
     }
 
     public signOut(){

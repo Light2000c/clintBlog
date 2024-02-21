@@ -43,6 +43,6 @@ export class PostThreeComponent {
   }
   
   public getImage(image: string){
-    return "http://clintblog.com.ng/api/uploads/" + image;
+    return "https://clintblog.com.ng/api/uploads/" + image;
    }
 }

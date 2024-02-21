@@ -100,7 +100,7 @@ export class NewsComponent {
 
 
   public getImage(image: string) {
-    return "http://clintblog.com.ng/api/uploads/" + image;
+    return "https://clintblog.com.ng/api/uploads/" + image;
   }
 
 
@@ -124,7 +124,7 @@ export class NewsComponent {
   }
 
   public navigateWithCategory(category: string){
-    this.router.navigate(['news', category]);
+    this.router.navigate(['news/', category]);
   }
 
 }

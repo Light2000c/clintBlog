@@ -18,7 +18,7 @@ export interface SignIn {
 
 export class AuthProvider {
 
-    public baseUrl: string = "http://clintblog.com.ng/api/";
+    public baseUrl: string = "https://clintblog.com.ng/api/";
     public user!: USER;
 
     constructor(

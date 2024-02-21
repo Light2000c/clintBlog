@@ -1,0 +1,45 @@
+body{
+    
+}
+
+.category-wrapper{
+    border-bottom: 1px black solid;
+    border-top: 1px black solid;
+    /* border-left: 25px black solid; */
+}
+
+.category-item {
+    border-right: 1px black solid;
+}
+
+.category-item h6{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.active-category{
+    border-bottom: 5px  #3880ff solid;
+}
+
+.active-category h6{
+   color:  #3880ff;
+   font-family: 'Times New Roman', Times, serif;
+}
+
+#search-min{
+ visibility: hidden;
+}
+
+#search-max{
+visibility: visible;
+}
+
+
+@media only screen and (max-width: 600px) {
+    #search-min{
+        visibility: visible;
+       }
+       
+       #search-max{
+       visibility: hidden;
+       }
+}

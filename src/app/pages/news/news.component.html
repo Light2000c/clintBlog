@@ -6,7 +6,7 @@
           <div class="row">
 
             <div class="col-md-9" data-aos="fade-up">
-              <!-- <h3 class="category-title">Category: All</h3> -->
+            <!-- <div class="col-md-9" > -->
 
               @if (!searchKeyword) {
               <h3 class="category-title">Category: {{ category? category : 'All' }}</h3>
@@ -17,7 +17,7 @@
             </div>
 
             <div *ngIf="category">
-              <ng-container *ngFor="let post of blogPost | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: resetLength(blogPost.length, 7)}">
+              <ng-container *ngFor="let post of blogPost | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: blogPost.length}">
                 <app-post-six [post]="post"></app-post-six>
               </ng-container>
             </div>
@@ -87,6 +87,7 @@
           <div class="row">
 
             <div class="col-md-9" data-aos="fade-up">
+            <!-- <div class="col-md-9" > -->
               <h3 class="category-title">Category: All</h3>
 
 

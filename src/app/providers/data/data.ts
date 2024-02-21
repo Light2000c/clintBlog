@@ -8,7 +8,7 @@ import { HttpHeaders } from "@angular/common/http";
 })
 
 export class DataProvider {
-    public baseUrl: string = "http://clintblog.com.ng/api/";
+    public baseUrl: string = "https://clintblog.com.ng/api/";
     public blogPost: any[] = [];
     public searchResult: any[] = [];
     public categories: any[] = [];
@@ -45,7 +45,7 @@ export class DataProvider {
     }
 
     public displayImage(image: string){
-        return `http://clintblog.com.ng/api/upload/${image}`;
+        return `https://clintblog.com.ng/api/upload/${image}`;
     }
 
    public setActiveCategory(value: string){

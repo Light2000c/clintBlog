@@ -17,7 +17,7 @@ export class BlogPostComponent implements OnInit {
   ngOnInit() { }
 
   public getImage(image: string) {
-    return "http://localhost:3000/uploads" + image;
+    return "https://localhost:3000/uploads" + image;
   }
 
 }

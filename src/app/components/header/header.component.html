@@ -8,25 +8,125 @@
 <link href="/assets/web/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 <link href="/assets/web/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 <link href="/assets/web/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-<link href="/assets/web/assets/vendor/aos/aos.css" rel="stylesheet">
+<!-- <link href="/assets/web/assets/vendor/aos/aos.css" rel="stylesheet"> -->
 
 <link href="/assets/web/assets/css/variables.css" rel="stylesheet">
 <link href="/assets/web/assets/css/main.css" rel="stylesheet">
 
+<link href="/assets/web/personal.css" rel="stylesheet">
+
+
+
+
+<!-- <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
+  <div class="bg-dark p-4">
+    <h5 class="text-body-emphasis h4">Collapsed content</h5>
+    <span class="text-body-secondary">Toggleable via the navbar brand.</span>
+  </div>
+</div>
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav> -->
+
+<nav class="navbar  navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <h1>ClintBlog</h1>
+    </a>
+
+    <div class="d-flex">
+      <ng-container *ngIf="displaySearchBox()">
+        <span>
+          <a (click)="showSearchBox()" *ngIf="!isSearchActive" class="js-search-open" id="search-min"><span
+              class="bi-search"></span></a></span>
+      </ng-container>
+      <span>
+        <a class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+          aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </a>
+      </span>
+    </div>
+    <div class="collapse navbar-collapse navbar-expand-md" id="navbarText">
+      <div class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/news">News</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      </div>
+      <div class="d-flex">
+        <a class=""><span class="bi-facebook"></span></a>
+        <a class=""><span class="bi-twitter"></span></a>
+        <a class=""><span class="bi-instagram"></span></a>
+        <ng-container *ngIf="displaySearchBox()">
+          <span>
+            <a (click)="showSearchBox()" *ngIf="!isSearchActive" class="js-search-open" id="search-max"><span
+                class="bi-search"></span></a></span>
+        </ng-container>
+      </div>
+    </div>
+    <div class="search-form-wrap  active js-search-form-wrap" *ngIf="isSearchActive">
+      <form class="search-form">
+        <span class="icon bi-search"></span>
+        <input type="text" (input)="onInputChange($event)" name="search" placeholder="Search" class="form-control">
+        <button (click)="hideSearchBox()" class="btn js-search-close"><span class="bi-x"></span></button>
+      </form>
+    </div>
+
+  </div>
+</nav>
+
+<div *ngIf="showCategory()" class="container">
+  <div class="row d-flex flex-nowrap category-wrapper" style="overflow-x: auto;">
+    <div (click)="navigateWithCategory('all')" [class]="setActive('all')?'col-auto ps-4 pe-4 category-item active-category' : 'col-auto ps-4 pe-4 category-item'">
+      <h6 class="text-capitalize">All</h6>
+    </div>
+    @for(category of categories; track category.title){
+    <ng-container *ngIf="setActive(category?.title); else otherCatgeory">
+      <div (click)="navigateWithCategory(category?.title)" class="col-auto ps-4 pe-4 category-item active-category">
+        <h6 class="text-capitalize">{{ category?.title }}</h6>
+      </div>
+    </ng-container>
+
+    <ng-template #otherCatgeory>
+      <div (click)="navigateWithCategory(category?.title)" class="col-auto ps-4 pe-4 category-item">
+        <h6 class="text-capitalize">{{ category?.title }}</h6>
+      </div>
+    </ng-template>
+    }@empty {
+    <div class="col-auto ps-4 pe-4 category-item">
+      <h6>Entertaiment</h6>
+    </div>
+    }
+  </div>
+</div>
+
+
+
 <!-- ======= Header ======= -->
-<header id="header" class="header d-flex align-items-center fixed-top">
+<!-- <header id="header" class="header d-flex align-items-center fixed-top">
   <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
     <a href="index.html" class="logo d-flex align-items-center">
-      <!-- Uncomment the line below if you also wish to use an image logo -->
-      <!-- <img src="/assets/web/assets/img/logo.png" alt=""> -->
       <h1>ClintBlog</h1>
     </a>
 
     <nav id="navbar" class="navbar">
       <ul>
         <li><a href="/">Home</a></li>
-        <!-- <li class="dropdown"><a href="news"><span>Blog</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+        <li class="dropdown"><a href="news"><span>Blog</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
           <ul>
             <li (click)="navigateWithCategory('all')"><a class="text-capitalize">All</a></li>
             @for(category of categories; track category.title){
@@ -35,7 +135,8 @@
               <li><a class="text-capitalize">Entertainment</a></li>
             }
           </ul>
-        </li> -->
+        </li>
+        
         <li class="dropdown"><a href="news"><span>Blog</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
           <ul>
             <li><a href="/news/all" class="text-capitalize">All</a></li>
@@ -49,7 +150,7 @@
         <li><a href="about">About</a></li>
         <li><a href="contact">Contact</a></li>
       </ul>
-    </nav><!-- .navbar -->
+    </nav>
 
     <div class="position-relative">
       <a class="mx-2"><span class="bi-facebook"></span></a>
@@ -63,7 +164,6 @@
 
       <i class="bi bi-list mobile-nav-toggle"></i>
 
-      <!-- ======= Search Form ======= -->
       <ng-container *ngIf="displaySearchBox()">
         <div class="search-form-wrap  active js-search-form-wrap" *ngIf="isSearchActive">
           <form class="search-form">
@@ -73,13 +173,13 @@
           </form>
         </div>
       </ng-container>
-      <!-- End Search Form -->
 
     </div>
-
   </div>
 
-</header><!-- End Header -->
+</header> -->
+
+
 
 <ng-content select=".head-content"></ng-content>
 
@@ -93,7 +193,7 @@
 
       <div class="row g-5">
         <div class="col-12 col-lg-4">
-          <h3 class="footer-heading">About ClintBlog</h3>
+          <h3 class="footer-heading display-2">ClintBlog</h3>
           <p>We're passionate about providing insightful content across diverse topics such as technology,
             entertainment, health, sports, and more. With a focus on quality and relevance, we strive to keep you
             informed about the latest trends and developments in each of our featured areas.</p>
@@ -115,8 +215,9 @@
           <div>
             <h3 class="footer-heading">Categories</h3>
             <ul class="footer-links list-unstyled">
-              <li (click)="navigateWithCategory(category.title)" *ngFor="let category of categories;  let i = index"><a
-                  href=""><i class="bi bi-chevron-right"></i>{{ category.title }}</a></li>
+              <li><a (click)="navigateWithCategory('all')"><i class="bi bi-chevron-right"></i> All</a></li>
+              <li *ngFor="let category of categories;  let i = index"><a (click)="navigateWithCategory(category?.title)"><i
+                    class="bi bi-chevron-right"></i>{{ category.title }}</a></li>
             </ul>
           </div>
         </div>

@@ -14,7 +14,7 @@
                             </li>
                             <li class="breadcrumb-item active">
                             </li>
-                            <li class="breadcrumb-item active">{{ blogPost?.title }}
+                            <li class="breadcrumb-item active">{{ blogPost.title }}
                             </li>
                         </ol>
                     </div>
@@ -50,7 +50,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-12 col-lg-6">
                                                         <img class="img-fluid"
-                                                            [src]="'https://clintblog.com.ng/api/uploads/'+blogPost?.image"
+                                                            [src]="'https://clintblog.com.ng/api/uploads/'+blogPost.image"
                                                             alt="No Image" srcset="">
 
                                                         <div class="form-group mt-2">
@@ -87,7 +87,7 @@
                                                                 </option>
 
                                                                 <ng-container *ngFor="let category of categories">
-                                                                    @if(category?.title == blogPost?.title){
+                                                                    @if(category?.title == blogPost.title){
                                                                     <option [value]="category?.title" selected>
                                                                         {{ category?.title }}</option>
                                                                     }@else{

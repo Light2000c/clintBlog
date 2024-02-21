@@ -47,7 +47,7 @@ export class HeaderComponent {
 
 
   public displaySearchBox(){
-   return this.router.url == '/news';
+   return this.router.url == '/news' || this.router.url.startsWith('/news/');
  
   }
 
@@ -67,8 +67,15 @@ export class HeaderComponent {
   }
 
   public navigateWithCategory(category: string){
-    const url = `/news/${category}`;
-   return this.router.navigateByUrl(url);
+   return this.router.navigate(['news', category]);
+  }
+
+  public setActive(category: string){
+    return this.router.url.includes(category);
+  }
+
+  public showCategory(){
+    return this.router.url == "/" || this.router.url.startsWith("/news")
   }
 
 }

@@ -18,7 +18,7 @@ export interface Blog {
 })
 export class DataService {
 
-  public baseUrl: string = "http://clintblog.com.ng/api/";
+  public baseUrl: string = "https://clintblog.com.ng/api/";
   public blogPosts: Blog[] = [];
   public categories: any[] = [];
   public teamMembers: any[] = [];

@@ -6,6 +6,7 @@
     <!-- ======= Hero Slider Section ======= -->
     <section id="hero-slider" class="hero-slider">
       <div class="container-md" data-aos="fade-in">
+      <!-- <div class="container-md"> -->
         <div class="row">
           <div class="col-12">
             <div class="swiper sliderFeaturedPosts">
@@ -45,12 +46,15 @@
         </div>
       </div>
     </section><!-- End Hero Slider Section -->
+ 
 
 
     <!-- ======= Culture Category Section ======= -->
     <ng-container *ngIf="blogPost && blogPost.length; else skeleton">
+
       <section class="category-section">
         <div class="container" data-aos="fade-up">
+        <!-- <div class="container"> -->
 
           <div class="section-header d-flex justify-content-between align-items-center mb-5">
             <h2>LATEST</h2>
@@ -90,6 +94,7 @@
     <ng-template #skeleton>
       <section class="category-section">
         <div class="container" data-aos="fade-up">
+        <!-- <div class="container"> -->
 
           <div class="section-header d-flex justify-content-between align-items-center mb-5">
             <h2>LATEST</h2>
